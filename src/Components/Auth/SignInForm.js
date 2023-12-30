@@ -87,7 +87,7 @@ const SignInForm = ({ onSwitchMode }) => {
         />
       </div>
       <button type="submit" className="btn btn-primary w-100 mt-4">
-        Sign In
+        SignIn
       </button>
       <div className="text-center mt-3">
         <Link to="/forgot-password">Forgot Password</Link>
