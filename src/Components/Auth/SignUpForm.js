@@ -62,6 +62,7 @@ if(response.ok){
           className="form-control"
           placeholder="Enter email"
           name="email"
+          id="email"  
           value={formData.email}
           onChange={handleInputChange}
           required
@@ -92,7 +93,7 @@ if(response.ok){
         />
       </div>
       <button type="submit" className="btn btn-primary w-100 mt-4">
-        Sign Up
+        SignUp
       </button>
       <div className="text-center mt-3">
         Already registered?
