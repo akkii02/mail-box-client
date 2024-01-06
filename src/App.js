@@ -1,23 +1,23 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import LoginForm from "./Components/Auth/LoginForm";
-import Mailbox from "./Components/Mail/Mailbox";
+import RootLayot from "./Components/Pages/RootLayout"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector } from "react-redux";
+import Mailbox from "./Components/Mail/Mailbox";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log("isLoggedIn", isLoggedIn);
 
   return (
-    <BrowserRouter>
+    <>
+      {isLoggedIn && <RootLayot/>}
       <Routes>
         {!isLoggedIn && <Route path="/" element={<LoginForm />} exact />}
-        {isLoggedIn && <Route path="/" element={<Mailbox/>} />}
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/composemail" element={<Mailbox/>}/>
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
-
-export default App;
+export default App

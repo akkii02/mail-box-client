@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Modal, Form, Button } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./Mailbox.css";
 import { useSelector } from "react-redux";
 
-const Mailbox = () => {
+const Mailbox = ({ showComposeModal, handleCloseComposeModal }) => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const userEmail = useSelector((state) => state.auth.userId);
   const replacedSenderMail = userEmail.replace(/[@.]/g, "");
-console.log("ser",replacedSenderMail)
+
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -46,55 +46,60 @@ console.log("ser",replacedSenderMail)
       let data = await response.json();
       console.log(data);
 
-   
       setEmail("");
       setSubject("");
       setEditorState(EditorState.createEmpty());
+      handleCloseComposeModal();
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <div className="email-compose-container">
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="to" className="m-2">
-          <Form.Control
-            type="email"
-            placeholder="To"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
+    <Modal show={showComposeModal} onHide={handleCloseComposeModal}>
+      <Modal.Header closeButton>
+        <Modal.Title>Compose Email</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={submitHandler}>
+          <Form.Group controlId="to" className="m-2">
+            <Form.Control
+              type="email"
+              placeholder="To"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="subject" className="m-2">
-          <Form.Control
-            type="text"
-            placeholder="Subject"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-          />
-        </Form.Group>
+          <Form.Group controlId="subject" className="m-2">
+            <Form.Control
+              type="text"
+              placeholder="Subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="body" className="m-2 email-editor-wrapper">
-          <Editor
-            editorState={editorState}
-            onEditorStateChange={setEditorState}
-            wrapperClassName="wrapper-class"
-            editorClassName="editor-class email-editor"
-            toolbarClassName="toolbar-class email-editor-toolbar"
-            placeholder="Write some message"
-            toolbar={{
-              inline: { inDropdown: true },
-            }}
-          />
-        </Form.Group>
+          <Form.Group controlId="body" className="m-2 email-editor-wrapper">
+            <Editor
+              editorState={editorState}
+              onEditorStateChange={setEditorState}
+              wrapperClassName="wrapper-class"
+              editorClassName="editor-class email-editor"
+              toolbarClassName="toolbar-class email-editor-toolbar"
+              placeholder="Write some message"
+              toolbar={{
+                inline: { inDropdown: true },
+              }}
+            />
+          </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Send
-        </Button>
-      </Form>
-    </div>
+          <Button variant="primary" type="submit">
+            Send
+          </Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
   );
 };
 
