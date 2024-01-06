@@ -24,7 +24,9 @@ const Mailbox = ({ showComposeModal, handleCloseComposeModal }) => {
     console.log("mail", plainText);
 
     const mailData = {
+      id:Date.now(),
       email: email,
+      emailIsNew:true,
       subject: subject,
       mailBody: plainText,
     };
