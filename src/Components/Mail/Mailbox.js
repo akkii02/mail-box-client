@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./Mailbox.css";
 import { useSelector } from "react-redux";
+import reRenderContext from "../store/reRenderContext";
 
 const Mailbox = ({ showComposeModal, handleCloseComposeModal }) => {
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ const Mailbox = ({ showComposeModal, handleCloseComposeModal }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const userEmail = useSelector((state) => state.auth.userId);
   const replacedSenderMail = userEmail.replace(/[@.]/g, "");
-
+const {setReRender} = useContext(reRenderContext);
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -47,7 +48,7 @@ const Mailbox = ({ showComposeModal, handleCloseComposeModal }) => {
       );
       let data = await response.json();
       console.log(data);
-
+setReRender(true);
       setEmail("");
       setSubject("");
       setEditorState(EditorState.createEmpty());
