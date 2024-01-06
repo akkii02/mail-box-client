@@ -1,3 +1,5 @@
+// # I will be added this functionality before Making the mails Realtime
+
 import React, { createContext, useState } from "react";
 
 const reRenderContext = createContext({
@@ -12,6 +14,8 @@ export const ReRenderProvider = (props) => {
     iSReRender: isReRender,
     setReRender: () => setIsReRender(!isReRender),
   };
+
+
 
   return (
     <reRenderContext.Provider value={reRenderValue}>

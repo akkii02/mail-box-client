@@ -56,8 +56,8 @@ const Sidebar = ({ onTabChange }) => {
       }
     };
 
-    fetchEmails('inbox'); // Fetch inbox emails
-    fetchEmails('sent'); // Fetch sent emails
+    fetchEmails('inbox'); 
+    fetchEmails('sent'); 
   }, [iSReRender]);
 
   return (
