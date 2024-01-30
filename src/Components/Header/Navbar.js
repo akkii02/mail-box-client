@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <div style={{"marginLeft":"50px "}}>
 
-        <span className="navbar-brand">Your Brand</span>
+        <span className="navbar-brand">Mail Box</span>
       </div>
       <div className="collapse navbar-collapse justify-content-end" id="navbarNav" style={{"marginRight":"50px "}}>
         <ul className="navbar-nav">

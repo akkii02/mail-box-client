@@ -111,7 +111,7 @@ const Sent = () => {
 
   return (
     <div className="inbox">
-      <h2 className="mb-3 text-center">Sent Box</h2>
+      <h2 className="mb-3 text-center" style={{"margin":"20px"}}>Sent Box</h2>
       <ListGroup className="w-75 m-1">
         {emails.map((email) => (
           <ListGroup.Item

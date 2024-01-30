@@ -35,6 +35,7 @@ const Sidebar = ({ onTabChange }) => {
 
   useEffect(() => {
     const fetchEmails = async (folder) => {
+      console.log("folder",folder)
       try {
         const response = await fetch(
           `https://mailboxclient-d7818-default-rtdb.firebaseio.com/${folder}${replacedSenderMail}.json`
@@ -57,7 +58,6 @@ const Sidebar = ({ onTabChange }) => {
     };
 
     fetchEmails('inbox'); 
-    fetchEmails('sent'); 
   }, [iSReRender]);
 
   return (

@@ -28,8 +28,9 @@ const Inbox = () => {
         const data = await response.json();
 
         if (data) {
-          const emailList = Object.values(data);
-          setEmails(emailList);
+          const emailData = Object.values(data);
+          console.log("fetchEmailList",emailData)
+          setEmails(emailData);
         }
       } catch (error) {
         console.error("Error fetching emails:", error);
@@ -42,10 +43,7 @@ const Inbox = () => {
   const handleEmailClick = (emailId) => {
     console.log("Clicked email ID:", emailId);
 
-    const updatedEmails = emails.map((email) =>
-      email.id === emailId ? { ...email, isRead: true } : email
-    );
-    setEmails(updatedEmails);
+  
 
     if (emailId) {
       navigate(`/inbox/${emailId}`);
@@ -111,7 +109,7 @@ const Inbox = () => {
 
   return (
     <div className="inbox">
-      <h2 className="mb-3 text-center">Inbox</h2>
+      <h2 className="mb-3 text-center" style={{"margin":"20px"}}>Inbox</h2>
       <ListGroup className="w-75 m-1">
         {emails.map((email) => (
           <ListGroup.Item
